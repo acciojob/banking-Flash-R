@@ -1,8 +1,8 @@
 package com.driver;
 
 public class SavingsAccount extends BankAccount{
-    double rate;
-    double maxWithdrawalLimit;
+    private double rate;
+    private double maxWithdrawalLimit;
 
     public double getRate() {
         return rate;
@@ -31,7 +31,7 @@ public class SavingsAccount extends BankAccount{
         if(amount > getBalance())
             throw new Exception("Insufficient Balance");
 
-        if(amount <= maxWithdrawalLimit) {
+        if(amount <= getMaxWithdrawalLimit()) {
             super.withdraw(amount);
         }
         else {
@@ -50,7 +50,7 @@ public class SavingsAccount extends BankAccount{
 
     public double getCompoundInterest(int times, int years){
         // Return the final amount considering that bank gives compound interest on current amount given times per year
-        return getBalance()*Math.pow((1+rate/(100)),times*years);
+        return getBalance()*Math.pow((1+rate/(100*times)),times*years);
     }
 
 }
